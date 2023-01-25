@@ -9,7 +9,7 @@ class ApiUtils {
   static const String sourcesEndpoint = "v2/top-headlines/sources";
 
   // Headline Endpoints parameter
-  static const String topHeadlineRequiredCountryParameter = "country=us";
+  static const String topHeadlineRequiredCountryParameter = "us";
 
   // receiveTimeout
   static const int receiveTimeout = 15000;

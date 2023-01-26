@@ -16,11 +16,13 @@ class NewsListRemoteSource {
 
   Future<ResponseWrapper> getNewsList() async {
     try {
-      final response = await apiClient.get(ApiUtils.topHeadlinesEndpoint,
-          queryParameters: {
-            'country': ApiUtils.topHeadlineRequiredCountryParameter,
-            'apiKey': ApiKey.apiKey
-          });
+      final response =
+          await apiClient.get(ApiUtils.topHeadlinesEndpoint, queryParameters: {
+        ApiUtils.topHeadlineRequiredCountryParameterKey:
+            ApiUtils.topHeadlineRequiredCountryParameterValue,
+        ApiUtils.apiKeyParameterKey: ApiKey.apiKey,
+        ApiUtils.pageSizeParameterKey: ApiUtils.maxNoArticlesParameterValue
+      });
       final newsListResponse = NewsListResponse.fromJson(response.data);
       if (response.statusCode == 200) {
         return Success(data: newsListResponse.articles);

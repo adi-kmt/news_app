@@ -8,8 +8,15 @@ class ApiUtils {
   static const String topHeadlinesEndpoint = "v2/top-headlines";
   static const String sourcesEndpoint = "v2/top-headlines/sources";
 
-  // Headline Endpoints parameter
-  static const String topHeadlineRequiredCountryParameter = "us";
+  static const String apiKeyParameterKey = 'apiKey';
+
+  // Headline Endpoints parameter keys
+  static const String topHeadlineRequiredCountryParameterKey = 'country';
+  static const String pageSizeParameterKey = 'pageSize';
+
+  // Headline Endpoints parameter values
+  static const String topHeadlineRequiredCountryParameterValue = "us";
+  static const int maxNoArticlesParameterValue = 80;
 
   // receiveTimeout
   static const int receiveTimeout = 15000;

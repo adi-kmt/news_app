@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:news_app/news_list_feature/data/sources/remote/response/articles_response.dart';
 
-@JsonSerializable()
 class NewsListResponse {
   String? status;
   int? totalResults;

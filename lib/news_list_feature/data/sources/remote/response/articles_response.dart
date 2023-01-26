@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:news_app/news_list_feature/data/sources/remote/response/sources_reponse.dart';
 
-@JsonSerializable()
 class ArticleResponse {
   SourceResponse? source;
   String? author;

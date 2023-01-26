@@ -23,4 +23,6 @@ class ApiUtils {
 
   // connectTimeout
   static const int connectionTimeout = 15000;
+
+  static const String genericApiErrorMessage = "Unexpected API error";
 }

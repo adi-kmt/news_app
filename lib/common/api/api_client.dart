@@ -10,12 +10,12 @@ class ApiClient {
       ..options.connectTimeout = ApiUtils.connectionTimeout
       ..options.receiveTimeout = ApiUtils.receiveTimeout
       ..interceptors.add(LogInterceptor(
-          // request: true,
-          // requestHeader: true,
-          // requestBody: true,
-          // responseHeader: true,
-          // responseBody: true,
-          ));
+        request: true,
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+      ));
   }
 
   Future<Response> get(

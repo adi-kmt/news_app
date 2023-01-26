@@ -2,12 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/common/api/api_client.dart';
 import 'package:news_app/common/domain/no_param.dart';
-import 'package:news_app/common/ui/ui_state_wrapper.dart';
 import 'package:news_app/news_list_feature/data/repository/news_list_repository_impl.dart';
 import 'package:news_app/news_list_feature/data/sources/remote/news_list_remote_source.dart';
 import 'package:news_app/news_list_feature/data/sources/remote/response/articles_response.dart';
 import 'package:news_app/news_list_feature/domain/usecase/news_list_usecase.dart';
 import 'package:logging/logging.dart';
+
+import 'common/api/response_wrapper.dart';
 
 void main() async {
   final apiClient = ApiClient(dio: Dio());
@@ -17,8 +18,7 @@ void main() async {
   final list = await usecase.call(NoParams());
   Logger.root.log(Level.SEVERE, "Got list");
   if (list is Success) {
-    final su = list as Success;
-    final dataList = su.data as List<ArticleResponse>;
+    final dataList = list.data as List<ArticleResponse>;
     dataList.forEach((article) {
       Logger.root.log(Level.SEVERE, "articles recieved are ${article.title}");
     });

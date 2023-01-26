@@ -22,7 +22,7 @@ class NewsListRemoteSource {
             'apiKey': ApiKey.apiKey
           });
       final newsListResponse = NewsListResponse.fromJson(response.data);
-      if (newsListResponse.status == "ok") {
+      if (response.statusCode == 200) {
         return Success(data: newsListResponse.articles);
       } else {
         return Failure(

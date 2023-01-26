@@ -5,7 +5,6 @@ import 'package:news_app/common/api/response_wrapper.dart';
 import 'package:news_app/news_list_feature/data/sources/remote/response/article_response_entity.dart';
 import 'package:news_app/utils/api_utils.dart';
 import 'package:news_app/utils/number_utils.dart';
-import 'package:news_app/utils/string_utils.dart';
 
 class NewsListRemoteSource {
   late final ApiClient apiClient;

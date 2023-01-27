@@ -4,8 +4,8 @@ import 'package:news_app/common/theme/theme_text.dart';
 
 ThemeData returnTheme() => ThemeData(
       // unselectedWidgetColor: AppColor.royalBlue,
-      primaryColor: ThemeColour.primaryColour,
-      scaffoldBackgroundColor: ThemeColour.selectedColour,
+      primaryColor: ThemeColour.selectedColour,
+      scaffoldBackgroundColor: ThemeColour.primaryColour,
       brightness: Brightness.light,
       cardTheme: const CardTheme(
         color: ThemeColour.secondaryColour,

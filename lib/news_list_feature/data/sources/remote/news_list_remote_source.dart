@@ -3,6 +3,7 @@ import 'package:news_app/common/api/api_client.dart';
 import 'package:news_app/common/api/api_exception_wrapper.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
 import 'package:news_app/news_list_feature/data/sources/remote/response/article_response_entity.dart';
+import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 import 'package:news_app/utils/api_utils.dart';
 import 'package:news_app/utils/number_utils.dart';
 
@@ -22,7 +23,9 @@ class NewsListRemoteSource {
       });
       final newsListResponse = ArticleResponse.fromJson(response.data);
       if (response.statusCode == 200) {
-        return Success(data: newsListResponse.articles);
+        return Success(
+            data: newsListResponse.articles
+                ?.map((article) => article.getArticleEntity));
       } else {
         return Failure(
             error: APIException(

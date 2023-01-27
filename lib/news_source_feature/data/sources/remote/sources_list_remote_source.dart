@@ -1,6 +1,7 @@
 import 'package:news_app/common/api/api_client.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
 import 'package:news_app/news_source_feature/data/sources/remote/response/sources_response_entity.dart';
+import 'package:news_app/news_source_feature/domain/model/news_source_entity.dart';
 import 'package:news_app/utils/api_utils.dart';
 
 import '../../../../api_key.dart';
@@ -18,7 +19,9 @@ class SourcesListRemoteSource {
           queryParameters: {ApiUtils.apiKeyParameterKey: ApiKey.apiKey});
       final sourcesList = SourcesResponse.fromJson(response.data);
       if (response.statusCode == 200) {
-        return Success(data: sourcesList.sources);
+        return Success(
+            data: sourcesList.sources
+                ?.map((source) => source.getNewsSourceEntity));
       } else {
         return Failure(
             error: APIException(

@@ -21,8 +21,8 @@ class NewsListRemoteSource {
         ApiUtils.apiKeyParameterKey: ApiKey.apiKey,
         ApiUtils.pageSizeParameterKey: ApiUtils.maxNoArticlesParameterValue
       });
-      final newsListResponse = ArticleResponse.fromJson(response.data);
       if (response.statusCode == 200) {
+        final newsListResponse = ArticleResponse.fromJson(response.data);
         return Success(
             data: newsListResponse.articles
                 ?.map((article) => article.getArticleEntity));

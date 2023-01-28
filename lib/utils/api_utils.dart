@@ -16,7 +16,7 @@ class ApiUtils {
 
   // Headline Endpoints parameter values
   static const String topHeadlineRequiredCountryParameterValue = "us";
-  static const int maxNoArticlesParameterValue = 80;
+  static const int maxNoArticlesParameterValue = 38;
 
   // receiveTimeout
   static const int receiveTimeout = 15000;

@@ -6,6 +6,7 @@ import 'package:news_app/news_favourites_feature/domain/repository/news_favourit
 import 'package:news_app/news_favourites_feature/domain/usecase/add_favourite_news_item.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/get_favourite_news_list.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/remove_favourite_news_item.dart';
+import 'package:news_app/news_favourites_feature/ui/bloc/news_favourite_cubit.dart';
 import 'package:news_app/news_item_detail_feature/ui/bloc/news_item_detail_cubit.dart';
 import 'package:news_app/news_list_feature/data/repository/news_list_repository_impl.dart';
 import 'package:news_app/news_list_feature/domain/usecase/news_list_usecase.dart';
@@ -52,9 +53,15 @@ Future init() async {
       RemoveFavouriteNewsItemUseCase(newsFavouriteRepository: getItInstance()));
 
   //Providing cubits
-  getItInstance
-      .registerFactory(() => NewsListCubit(newsListUseCase: getItInstance()));
+  getItInstance.registerFactory(() => NewsListCubit(
+      newsListUseCase: getItInstance(),
+      removeFavouriteNewsItemUseCase: getItInstance(),
+      addFavouriteNewsItemUseCase: getItInstance()));
   getItInstance.registerFactory(
       () => NewsSourceListCubit(sourcesListUsecase: getItInstance()));
   getItInstance.registerFactory(() => NewsItemDetailCubit());
+  getItInstance.registerFactory(() => NewsFavouriteCubit(
+      getFavouriteNewsListUseCase: getItInstance(),
+      removeFavouriteNewsItemUseCase: getItInstance(),
+      addFavouriteNewsItemUseCase: getItInstance()));
 }

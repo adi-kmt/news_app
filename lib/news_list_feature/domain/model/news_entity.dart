@@ -6,14 +6,15 @@ class NewsArticleEntity {
   late String content;
   late String description;
   late String image;
+  late bool isFavourite;
 
-  NewsArticleEntity({
-    required this.content,
-    required this.description,
-    required this.title,
-    required this.source,
-    required this.image,
-  });
+  NewsArticleEntity(
+      {required this.content,
+      required this.description,
+      required this.title,
+      required this.source,
+      required this.image,
+      required this.isFavourite});
 }
 
 extension ArticleResponseExtension on ArticleResponseArticles {
@@ -22,5 +23,6 @@ extension ArticleResponseExtension on ArticleResponseArticles {
       description: this.description ?? "",
       title: this.title ?? "",
       source: this.xSource?.name ?? "",
-      image: this.urlToImage ?? "");
+      image: this.urlToImage ?? "",
+      isFavourite: false);
 }

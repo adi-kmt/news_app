@@ -1,9 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
 import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_list_feature/data/repository/news_list_repository_impl.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:news_app/news_list_feature/data/sources/remote/response/article_response_entity.dart';
 import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 import 'package:news_app/news_list_feature/domain/repository/news_list_repo.dart';
 import 'package:news_app/news_list_feature/domain/usecase/news_list_usecase.dart';
@@ -38,11 +37,26 @@ void main() {
   test("Check if all data is received", () async {
     final ResponseWrapper response = Success(data: [
       NewsArticleEntity(
-          content: '', description: "", title: "", source: "", image: ""),
+          content: '',
+          description: "",
+          title: "",
+          source: "",
+          image: "",
+          isFavourite: false),
       NewsArticleEntity(
-          content: '', description: "", title: "", source: "", image: ""),
+          content: '',
+          description: "",
+          title: "",
+          source: "",
+          image: "",
+          isFavourite: false),
       NewsArticleEntity(
-          content: '', description: "", title: "", source: "", image: ""),
+          content: '',
+          description: "",
+          title: "",
+          source: "",
+          image: "",
+          isFavourite: false),
     ]);
 
     when(() => newsListRepository.getNewsList())
@@ -68,7 +82,8 @@ void main() {
           description: "abc",
           title: "abcd",
           source: "abcd",
-          image: "aaaa"),
+          image: "aaaa",
+          isFavourite: false),
     ]);
 
     when(() => newsListRepository.getNewsList())
@@ -83,6 +98,7 @@ void main() {
         expect(data[0].description, "abc");
         expect(data[0].source, "abcd");
         expect(data[0].image, "aaaa");
+        expect(data[0].isFavourite, false);
       } else {
         print("Test failed");
       }

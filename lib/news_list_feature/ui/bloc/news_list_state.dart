@@ -2,9 +2,33 @@ part of 'news_list_cubit.dart';
 
 abstract class NewsListState extends Equatable {
   const NewsListState();
-}
 
-class NewsListInitial extends NewsListState {
   @override
   List<Object> get props => [];
+}
+
+class NewsListInitial extends NewsListState {}
+
+class NewsListLoading extends NewsListState {}
+
+class NewsListReady extends NewsListState {
+  final List<NewsArticleEntity> newsArticleEntityList;
+
+  const NewsListReady({required this.newsArticleEntityList});
+
+  @override
+  List<Object> get props => [
+        newsArticleEntityList.map((e) => e.title),
+        newsArticleEntityList.map((e) => e.source),
+        newsArticleEntityList.map((e) => e.isFavourite)
+      ];
+}
+
+class NewsListFailure extends NewsListState {
+  final Exception errorMessage;
+
+  const NewsListFailure({required this.errorMessage});
+
+  @override
+  get props => [errorMessage.toString()];
 }

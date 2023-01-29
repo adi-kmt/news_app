@@ -6,6 +6,7 @@ import 'package:news_app/common/di/get_it_module.dart' as get_it;
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   unawaited(get_it.init());
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   await Hive.initFlutter(appDocumentDir.path);

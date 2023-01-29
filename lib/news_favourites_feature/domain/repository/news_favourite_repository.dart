@@ -1,9 +1,11 @@
-import 'package:news_app/common/api/response_wrapper.dart';
+import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 
 abstract class NewsFavouriteRepository {
-  Future<ResponseWrapper> getFavouriteList();
+  Future<Iterable<NewsArticleEntity>?> getFavouriteList();
 
-  Future<ResponseWrapper> addFavouriteItem();
+  Future<void> addFavouriteItem(NewsArticleEntity newsArticleEntity);
 
-  Future<ResponseWrapper> removeFavouriteItem();
+  Future<void> removeFavouriteItem(int newsId);
+
+  Future<bool> checkIfFavourite(int newsId);
 }

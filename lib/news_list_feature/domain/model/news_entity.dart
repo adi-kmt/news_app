@@ -1,3 +1,4 @@
+import 'package:news_app/news_favourites_feature/data/local/entity/news_article_entity.dart';
 import 'package:news_app/news_list_feature/data/sources/remote/response/article_response_entity.dart';
 
 class NewsArticleEntity {
@@ -15,6 +16,17 @@ class NewsArticleEntity {
       required this.source,
       required this.image,
       required this.isFavourite});
+
+  factory NewsArticleEntity.fromNewsArticleEntitiy(
+      NewsLocalEntity newsLocalEntity) {
+    return NewsArticleEntity(
+        content: newsLocalEntity.content,
+        description: newsLocalEntity.description,
+        title: newsLocalEntity.title,
+        source: newsLocalEntity.source,
+        image: newsLocalEntity.image,
+        isFavourite: newsLocalEntity.isFavourite);
+  }
 }
 
 extension ArticleResponseExtension on ArticleResponseArticles {

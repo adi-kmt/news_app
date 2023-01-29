@@ -17,6 +17,7 @@ import 'package:news_app/news_source_feature/domain/repository/source_list_repo.
 import 'package:news_app/news_source_feature/domain/usecase/sources_list_usecase.dart';
 import 'package:news_app/news_source_feature/ui/bloc/news_source_list_cubit.dart';
 
+import '../../news_favourites_feature/data/local/news_favourite_local_source.dart';
 import '../../news_list_feature/data/sources/remote/news_list_remote_source.dart';
 import '../../news_list_feature/domain/repository/news_list_repo.dart';
 
@@ -42,9 +43,10 @@ Future init() async {
       () => SourcesListUsecase(sourceListRepository: getItInstance()));
 
   // News Favourite Data-Domain module services
-  //Providing local source/Hydrated cubit??
-  getItInstance.registerLazySingleton<NewsFavouriteRepository>(
-      () => NewsFavouriteRepositoryImpl());
+  getItInstance.registerLazySingleton<NewsFavouriteLocalSource>(
+      () => NewsFavouriteLocalSource());
+  getItInstance.registerLazySingleton<NewsFavouriteRepository>(() =>
+      NewsFavouriteRepositoryImpl(newsFavouriteLocalSource: getItInstance()));
   getItInstance.registerLazySingleton(() =>
       GetFavouriteNewsListUseCase(newsFavouriteRepository: getItInstance()));
   getItInstance.registerLazySingleton(() =>

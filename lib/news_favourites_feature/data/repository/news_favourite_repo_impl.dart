@@ -15,8 +15,9 @@ class NewsFavouriteRepositoryImpl implements NewsFavouriteRepository {
   }
 
   @override
-  Future<bool> checkIfFavourite(int newsId) async {
-    return await newsFavouriteLocalSource.checkIfFavourite(newsId);
+  Future<bool> checkIfFavourite(NewsArticleEntity newsArticleEntity) async {
+    final newsLocalEntity = NewsLocalEntity.fromNewsEntity(newsArticleEntity);
+    return await newsFavouriteLocalSource.checkIfFavourite(newsLocalEntity);
   }
 
   @override

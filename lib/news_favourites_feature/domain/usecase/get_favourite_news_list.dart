@@ -8,7 +8,8 @@ class GetFavouriteNewsListUseCase {
 
   GetFavouriteNewsListUseCase({required this.newsFavouriteRepository});
 
-  Future<Iterable<NewsArticleEntity>?> call(NoParams param) async {
-    return await newsFavouriteRepository.getFavouriteList();
+  Future<List<NewsArticleEntity>?> call(NoParams param) async {
+    final list = await newsFavouriteRepository.getFavouriteList();
+    return list?.toList();
   }
 }

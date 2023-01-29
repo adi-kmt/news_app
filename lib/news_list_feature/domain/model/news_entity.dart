@@ -27,6 +27,23 @@ class NewsArticleEntity {
         image: newsLocalEntity.image,
         isFavourite: newsLocalEntity.isFavourite);
   }
+
+  NewsArticleEntity deepCopy({
+    required String content,
+    required String description,
+    required String title,
+    required String source,
+    required String image,
+    required bool isFavourite,
+  }) {
+    return NewsArticleEntity(
+        content: content,
+        description: description,
+        title: title,
+        source: source,
+        image: image,
+        isFavourite: isFavourite);
+  }
 }
 
 extension ArticleResponseExtension on ArticleResponseArticles {

@@ -36,10 +36,18 @@ class NewsFavouriteLocalSource {
     return newsList;
   }
 
-  Future<bool> checkIfFavourite(int newsId) async {
-    final newsBox = await hiveBox.openBox(StringUtils.newsBox);
-    final isFavourite = newsBox.containsKey(newsId);
-    return isFavourite;
+  Future<bool> checkIfFavourite(NewsLocalEntity newsLocalEntity) async {
+    final newsBox = await _openBox(StringUtils.newsBox);
+    final newsKeys = newsBox.keys;
+    var key = 0;
+    while (key <= newsKeys.length) {
+      final newsItem = newsBox.get(key);
+      if (newsItem != null && newsItem == newsLocalEntity) {
+        return true;
+      }
+      key++;
+    }
+    return false;
   }
 
   Future<Box> _openBox(String type) async {

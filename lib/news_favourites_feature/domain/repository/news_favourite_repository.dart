@@ -7,5 +7,5 @@ abstract class NewsFavouriteRepository {
 
   Future<void> removeFavouriteItem(int newsId);
 
-  Future<bool> checkIfFavourite(int newsId);
+  Future<bool> checkIfFavourite(NewsArticleEntity newsArticleEntity);
 }

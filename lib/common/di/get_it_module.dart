@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app/common/api/api_client.dart';
+import 'package:news_app/news_favourites_feature/data/local/hivie_init.dart';
 import 'package:news_app/news_favourites_feature/data/repository/news_favourite_repo_impl.dart';
 import 'package:news_app/news_favourites_feature/domain/repository/news_favourite_repository.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/add_favourite_news_item.dart';
@@ -43,8 +44,9 @@ Future init() async {
       () => SourcesListUsecase(sourceListRepository: getItInstance()));
 
   // News Favourite Data-Domain module services
+  getItInstance.registerLazySingleton<HiveInit>(() => HiveInit());
   getItInstance.registerLazySingleton<NewsFavouriteLocalSource>(
-      () => NewsFavouriteLocalSource());
+      () => NewsFavouriteLocalSource(hiveBox: getItInstance()));
   getItInstance.registerLazySingleton<NewsFavouriteRepository>(() =>
       NewsFavouriteRepositoryImpl(newsFavouriteLocalSource: getItInstance()));
   getItInstance.registerLazySingleton(() =>

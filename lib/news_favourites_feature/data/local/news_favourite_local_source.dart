@@ -1,25 +1,25 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:news_app/news_favourites_feature/data/local/hivie_init.dart';
 import 'package:news_app/utils/string_utils.dart';
 
 import 'entity/news_article_entity.dart';
 
 class NewsFavouriteLocalSource {
-  late final HiveInterface hiveBox;
+  late final HiveInit hiveBox;
 
-  NewsFavouriteLocalSource();
+  NewsFavouriteLocalSource({required this.hiveBox});
 
   Future<void> saveMovie(NewsLocalEntity newsLocalEntity) async {
-    final newsBox = await _openBox(StringUtils.newsBox);
+    final newsBox = await hiveBox.openBox(StringUtils.newsBox);
     await newsBox.put(newsLocalEntity.id, newsLocalEntity);
   }
 
   Future<void> deleteMovie(int newsId) async {
-    final newsBox = await _openBox(StringUtils.newsBox);
+    final newsBox = await hiveBox.openBox(StringUtils.newsBox);
     await newsBox.delete(newsId);
   }
 
   Future<List<NewsLocalEntity>> getAllNewsFavourite() async {
-    final newsBox = await _openBox(StringUtils.newsBox);
+    final newsBox = await hiveBox.openBox(StringUtils.newsBox);
     final newsKeys = newsBox.keys;
     List<NewsLocalEntity> newsList = [];
     newsKeys.forEach((newsKey) {
@@ -32,17 +32,8 @@ class NewsFavouriteLocalSource {
   }
 
   Future<bool> checkIfFavourite(int newsId) async {
-    final newsBox = await _openBox(StringUtils.newsBox);
+    final newsBox = await hiveBox.openBox(StringUtils.newsBox);
     final isFavourite = newsBox.containsKey(newsId);
     return isFavourite;
-  }
-
-  Future<Box> _openBox(String type) async {
-    try {
-      final box = await hiveBox.openBox(type);
-      return box;
-    } catch (e) {
-      throw Exception("Unable to open box");
-    }
   }
 }

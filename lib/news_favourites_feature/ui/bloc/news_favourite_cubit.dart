@@ -39,12 +39,12 @@ class NewsFavouriteCubit extends Cubit<NewsFavouriteState> {
   Future<void> addFavouriteNewsItem(NewsArticleEntity newsArticleEntity) async {
     emit(NewsFavouriteLoading());
     await addFavouriteNewsItemUseCase.call(newsArticleEntity);
-    emit(const NewsFavouriteReady(newsArticleEntityList: []));
+    emit(NewsFavouriteAdded());
   }
 
-  void removeFavourtieNewsItem(int newsId) async {
+  void removeFavouriteNewsItem(int newsId) async {
     emit(NewsFavouriteLoading());
     await removeFavouriteNewsItemUseCase.call(newsId);
-    emit(const NewsFavouriteReady(newsArticleEntityList: []));
+    emit(NewsFavouriteRemoved());
   }
 }

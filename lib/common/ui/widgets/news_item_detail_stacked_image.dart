@@ -28,6 +28,14 @@ class NewsStackedImageWidget extends StatelessWidget {
           imageUrl: newsArticleEntity.image,
           width: ScreenUtil.screenWidth,
           height: ScreenUtil.screenHeight / 2,
+          placeholder: (context, _) => SizedBox(
+              width: ScreenUtil.screenWidth,
+              height: ScreenUtil.screenHeight / 2,
+              child: Image.asset('assets/images/default-image.jpg')),
+          errorWidget: (context, _, dynamic item) => SizedBox(
+              width: ScreenUtil.screenWidth,
+              height: ScreenUtil.screenHeight / 2,
+              child: Image.asset('assets/images/default-image.jpg')),
         ),
       ),
       Positioned(

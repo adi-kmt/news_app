@@ -41,6 +41,14 @@ class NewsItemWidget extends StatelessWidget {
                   imageUrl: newsArticleEntity.image,
                   width: ThemeSizes.dimen_20.w,
                   height: ThemeSizes.dimen_20.h,
+                  placeholder: (context, _) => SizedBox(
+                      width: ThemeSizes.dimen_20.w,
+                      height: ThemeSizes.dimen_20.h,
+                      child: Image.asset('assets/images/default-image.jpg')),
+                  errorWidget: (context, _, dynamic item) => SizedBox(
+                      width: ThemeSizes.dimen_20.w,
+                      height: ThemeSizes.dimen_20.h,
+                      child: Image.asset('assets/images/default-image.jpg')),
                 ),
               ),
               Expanded(

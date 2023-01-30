@@ -11,6 +11,24 @@ class NewsListInitial extends NewsListState {}
 
 class NewsListLoading extends NewsListState {}
 
+class NewsListFavouriteAdded extends NewsListState {
+  final NewsArticleEntity newsArticleEntity;
+
+  const NewsListFavouriteAdded({required this.newsArticleEntity});
+
+  @override
+  List<Object> get props => [newsArticleEntity.title];
+}
+
+class NewsListFavouriteRemoved extends NewsListState {
+  final String newsArticleEntityTitle;
+
+  const NewsListFavouriteRemoved({required this.newsArticleEntityTitle});
+
+  @override
+  List<Object> get props => [newsArticleEntityTitle];
+}
+
 class NewsListReady extends NewsListState {
   final List<NewsArticleEntity> newsArticleEntityList;
 

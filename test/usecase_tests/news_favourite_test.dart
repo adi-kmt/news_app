@@ -47,15 +47,17 @@ void main() {
   });
 
   test("Check is favourite list usecase", () async {
-    when(() => newsFavouriteRepositoryMock.checkIfFavourite(newsList[0]))
+    when(() => newsFavouriteRepositoryMock.checkIfFavourite(newsList[0].title))
         .thenAnswer((invocation) async => true);
-    final result = await checkIfFavouriteNewsItemUseCase.call(newsList[0]);
+    final result =
+        await checkIfFavouriteNewsItemUseCase.call(newsList[0].title);
     expect(result, true);
   });
   test("Check is favourite list usecase", () async {
-    when(() => newsFavouriteRepositoryMock.checkIfFavourite(newsList[0]))
+    when(() => newsFavouriteRepositoryMock.checkIfFavourite(newsList[0].title))
         .thenAnswer((invocation) async => false);
-    final result = await checkIfFavouriteNewsItemUseCase.call(newsList[0]);
+    final result =
+        await checkIfFavouriteNewsItemUseCase.call(newsList[0].title);
     expect(result, false);
   });
 }

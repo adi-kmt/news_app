@@ -61,7 +61,7 @@ Future init() async {
       newsListUseCase: getItInstance(),
       removeFavouriteNewsItemUseCase: getItInstance(),
       addFavouriteNewsItemUseCase: getItInstance(),
-      checkIfFavouriteNewsItemUseCase: getItInstance()));
+      getFavouriteNewsListUseCase: getItInstance()));
   getItInstance.registerFactory(
       () => NewsSourceListCubit(sourcesListUsecase: getItInstance()));
   getItInstance.registerFactory(() => NewsItemDetailCubit());

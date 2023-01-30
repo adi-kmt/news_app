@@ -11,10 +11,6 @@ class NewsFavouriteInitial extends NewsFavouriteState {}
 
 class NewsFavouriteLoading extends NewsFavouriteState {}
 
-class NewsFavouriteAdded extends NewsFavouriteState {}
-
-class NewsFavouriteRemoved extends NewsFavouriteState {}
-
 class NewsFavouriteReady extends NewsFavouriteState {
   final List<NewsArticleEntity> newsArticleEntityList;
 

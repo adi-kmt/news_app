@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../common/api/response_wrapper.dart';
 import '../../../common/domain/no_param.dart';
 import '../../../news_list_feature/domain/model/news_entity.dart';
 import '../../domain/usecase/add_favourite_news_item.dart';
@@ -25,26 +24,12 @@ class NewsFavouriteCubit extends Cubit<NewsFavouriteState> {
     emit(NewsFavouriteLoading());
 
     final result = await getFavouriteNewsListUseCase.call(NoParams());
-    if (result is Success) {
-      final newsList = result as List<NewsArticleEntity>;
-      // final checkedNewsList =
-      //     newsList.map((newsItem) async => await checkifFavourite(newsItem));
+    if (result != null) {
+      final newsList = result;
       emit(NewsFavouriteReady(newsArticleEntityList: newsList));
-    } else if (result is Failure) {
+    } else {
       emit(NewsFavouriteFailed(
           errorMessage: Exception("Failed to get favourite items")));
     }
-  }
-
-  Future<void> addFavouriteNewsItem(NewsArticleEntity newsArticleEntity) async {
-    emit(NewsFavouriteLoading());
-    await addFavouriteNewsItemUseCase.call(newsArticleEntity);
-    emit(NewsFavouriteAdded());
-  }
-
-  void removeFavouriteNewsItem(int newsId) async {
-    emit(NewsFavouriteLoading());
-    await removeFavouriteNewsItemUseCase.call(newsId);
-    emit(NewsFavouriteRemoved());
   }
 }

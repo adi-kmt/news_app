@@ -2,9 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:news_app/news_favourites_feature/data/local/entity/news_article_entity.dart';
+import 'package:news_app/news_favourites_feature/data/local/hivie_init.dart';
 import 'package:news_app/news_favourites_feature/data/local/news_favourite_local_source.dart';
 
-class HiveInitMock extends Mock implements HiveInterface {}
+class HiveInitMock extends Mock implements HiveInit {}
 
 class MockHiveBox extends Mock implements Box {}
 
@@ -18,7 +19,7 @@ final NewsLocalEntity savableNewsEntity = NewsLocalEntity(
     isFavourite: false);
 
 void main() {
-  late final HiveInterface hiveInit;
+  late final HiveInit hiveInit;
   late final Box mockHiveBox;
   late final NewsFavouriteLocalSource newsFavouriteLocalSource;
 

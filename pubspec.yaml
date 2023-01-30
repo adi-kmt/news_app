@@ -43,6 +43,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   google_nav_bar: ^5.0.6
   cached_network_image: any
+  like_button: ^2.0.5
 
 
   # The following adds the Cupertino Icons font to your application.

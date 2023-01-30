@@ -10,7 +10,6 @@ class HiveInitMock extends Mock implements HiveInit {}
 class MockHiveBox extends Mock implements Box {}
 
 final NewsLocalEntity savableNewsEntity = NewsLocalEntity(
-    id: 0,
     content: "AA",
     description: "AAAAA",
     title: "aaaa",
@@ -32,20 +31,21 @@ void main() {
   test("Check if local source is caching accurately", () async {
     when(() => hiveInit.openBox(any()))
         .thenAnswer((invocation) async => mockHiveBox);
-    when(() => mockHiveBox.put(0, savableNewsEntity))
+    when(() => mockHiveBox.put(savableNewsEntity.title, savableNewsEntity))
         .thenAnswer((invocation) async => savableNewsEntity);
     await newsFavouriteLocalSource.saveMovie(savableNewsEntity);
     verify(() => hiveInit.openBox(any()));
-    verify(() => mockHiveBox.put(0, savableNewsEntity));
+    verify(() => mockHiveBox.put(savableNewsEntity.title, savableNewsEntity));
   });
 
   test("Check if local source returns news item", () async {
     when(() => hiveInit.openBox(any()))
         .thenAnswer((invocation) async => mockHiveBox);
-    when(() => mockHiveBox.get(0))
+    when(() => mockHiveBox.get(savableNewsEntity.title))
         .thenAnswer((invocation) async => savableNewsEntity);
-    final result = await newsFavouriteLocalSource.getMovie(0);
-    verify(() => mockHiveBox.get(0));
-    expect(result, savableNewsEntity);
+    final result = await newsFavouriteLocalSource
+        .checkIfFavourite(savableNewsEntity.title);
+    verify(() => mockHiveBox.get(savableNewsEntity.title));
+    expect(result, true);
   });
 }

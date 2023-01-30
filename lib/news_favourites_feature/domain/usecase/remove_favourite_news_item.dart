@@ -5,7 +5,7 @@ class RemoveFavouriteNewsItemUseCase {
 
   RemoveFavouriteNewsItemUseCase({required this.newsFavouriteRepository});
 
-  Future<void> call(int newsId) async {
-    return await newsFavouriteRepository.removeFavouriteItem(newsId);
+  Future<void> call(String newsTitle) async {
+    return await newsFavouriteRepository.removeFavouriteItem(newsTitle);
   }
 }

@@ -6,29 +6,25 @@ part 'news_article_entity.g.dart';
 @HiveType(typeId: 0)
 class NewsLocalEntity extends NewsArticleEntity {
   @HiveField(0)
-  final int id;
-
-  @HiveField(1)
   late String title;
 
-  @HiveField(2)
+  @HiveField(1)
   late String content;
 
-  @HiveField(3)
+  @HiveField(2)
   late String description;
 
-  @HiveField(4)
+  @HiveField(3)
   late String image;
 
-  @HiveField(5)
+  @HiveField(4)
   late bool isFavourite;
 
-  @HiveField(6)
+  @HiveField(5)
   late String source;
 
   NewsLocalEntity(
-      {required this.id,
-      required this.content,
+      {required this.content,
       required this.description,
       required this.title,
       required this.source,
@@ -44,7 +40,6 @@ class NewsLocalEntity extends NewsArticleEntity {
 
   factory NewsLocalEntity.fromNewsEntity(NewsArticleEntity newsArticleEntity) {
     return NewsLocalEntity(
-        id: 0,
         content: newsArticleEntity.content,
         description: newsArticleEntity.description,
         title: newsArticleEntity.title,

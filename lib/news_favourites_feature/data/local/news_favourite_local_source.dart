@@ -10,17 +10,22 @@ class NewsFavouriteLocalSource {
 
   Future<void> saveMovie(NewsLocalEntity newsLocalEntity) async {
     final newsBox = await hiveBox.openBox(StringUtils.newsBox);
-    await newsBox.put(newsLocalEntity.id, newsLocalEntity);
+    return await newsBox.put(newsLocalEntity.title, newsLocalEntity);
   }
 
-  Future<void> deleteMovie(int newsId) async {
+  Future<void> deleteMovie(String newsTitle) async {
     final newsBox = await hiveBox.openBox(StringUtils.newsBox);
-    await newsBox.delete(newsId);
+    return await newsBox.delete(newsTitle);
   }
 
-  Future<NewsLocalEntity> getMovie(int newsId) async {
+  Future<bool> checkIfFavourite(String newsTitle) async {
     final newsBox = await hiveBox.openBox(StringUtils.newsBox);
-    return await newsBox.get(newsId);
+    final isPresent = await newsBox.get(newsTitle);
+    if (isPresent != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<List<NewsLocalEntity>> getAllNewsFavourite() async {
@@ -34,19 +39,5 @@ class NewsFavouriteLocalSource {
       }
     });
     return newsList;
-  }
-
-  Future<bool> checkIfFavourite(NewsLocalEntity newsLocalEntity) async {
-    final newsBox = await hiveBox.openBox(StringUtils.newsBox);
-    final newsKeys = newsBox.keys;
-    var key = 0;
-    while (key <= newsKeys.length) {
-      final newsItem = newsBox.get(key);
-      if (newsItem != null && newsItem == newsLocalEntity) {
-        return true;
-      }
-      key++;
-    }
-    return false;
   }
 }

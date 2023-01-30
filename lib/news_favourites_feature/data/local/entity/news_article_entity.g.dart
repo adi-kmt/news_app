@@ -17,33 +17,30 @@ class NewsLocalEntityAdapter extends TypeAdapter<NewsLocalEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return NewsLocalEntity(
-      id: fields[0] as int,
-      content: fields[2] as String,
-      description: fields[3] as String,
-      title: fields[1] as String,
-      source: fields[6] as String,
-      image: fields[4] as String,
-      isFavourite: fields[5] as bool,
+      content: fields[1] as String,
+      description: fields[2] as String,
+      title: fields[0] as String,
+      source: fields[5] as String,
+      image: fields[3] as String,
+      isFavourite: fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, NewsLocalEntity obj) {
     writer
-      ..writeByte(7)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.title)
-      ..writeByte(2)
-      ..write(obj.content)
-      ..writeByte(3)
-      ..write(obj.description)
-      ..writeByte(4)
-      ..write(obj.image)
-      ..writeByte(5)
-      ..write(obj.isFavourite)
       ..writeByte(6)
+      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(1)
+      ..write(obj.content)
+      ..writeByte(2)
+      ..write(obj.description)
+      ..writeByte(3)
+      ..write(obj.image)
+      ..writeByte(4)
+      ..write(obj.isFavourite)
+      ..writeByte(5)
       ..write(obj.source);
   }
 

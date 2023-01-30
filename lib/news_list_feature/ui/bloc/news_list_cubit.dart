@@ -44,9 +44,9 @@ class NewsListCubit extends Cubit<NewsListState> {
     emit(const NewsListReady(newsArticleEntityList: []));
   }
 
-  void removeNewsFromFavourite(int newsId) async {
+  void removeNewsFromFavourite(String newsTitle) async {
     emit(NewsListLoading());
-    await removeFavouriteNewsItemUseCase.call(newsId);
+    await removeFavouriteNewsItemUseCase.call(newsTitle);
     emit(const NewsListReady(newsArticleEntityList: []));
   }
 

@@ -15,21 +15,21 @@ class NewsFavouriteRepositoryImpl implements NewsFavouriteRepository {
   }
 
   @override
-  Future<bool> checkIfFavourite(NewsArticleEntity newsArticleEntity) async {
-    final newsLocalEntity = NewsLocalEntity.fromNewsEntity(newsArticleEntity);
-    return await newsFavouriteLocalSource.checkIfFavourite(newsLocalEntity);
+  Future<bool> checkIfFavourite(String newsTitle) async {
+    return await newsFavouriteLocalSource.checkIfFavourite(newsTitle);
   }
 
   @override
-  Future<Iterable<NewsArticleEntity>?> getFavouriteList() async {
+  Future<List<NewsArticleEntity>?> getFavouriteList() async {
     final newsArticleList =
         await newsFavouriteLocalSource.getAllNewsFavourite();
     return newsArticleList
-        .map((newsItem) => NewsArticleEntity.fromNewsArticleEntitiy(newsItem));
+        .map((newsItem) => NewsArticleEntity.fromNewsArticleEntitiy(newsItem))
+        ?.toList();
   }
 
   @override
-  Future<void> removeFavouriteItem(int newsId) async {
-    return await newsFavouriteLocalSource.deleteMovie(newsId);
+  Future<void> removeFavouriteItem(String newsTitle) async {
+    return await newsFavouriteLocalSource.deleteMovie(newsTitle);
   }
 }

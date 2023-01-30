@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:news_app/common/theme/theme_sizes.dart';
+import 'package:news_app/news_item_detail_feature/ui/screen/news_item_detail.dart';
 import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 import 'package:news_app/utils/size_utils.dart';
 
@@ -14,7 +15,13 @@ class NewsItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => NewsItemDetailScreen(
+                    newsArticleEntity: newsArticleEntity)));
+      },
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Container(

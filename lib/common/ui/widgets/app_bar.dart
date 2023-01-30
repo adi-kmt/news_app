@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/common/theme/theme_sizes.dart';
 import 'package:news_app/utils/screen_utils.dart';
+import 'package:news_app/utils/size_utils.dart';
 
 import '../../theme/theme_colour.dart';
+import '../../theme/theme_text.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -13,7 +16,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       title: Text(
         title,
-        style: const TextStyle(color: ThemeColour.primaryColour),
+        style:
+            ThemeText.subtitle1?.copyWith(color: ThemeColour.secondaryColour),
       ),
       centerTitle: true,
       backgroundColor: ThemeColour.selectedColour,
@@ -21,6 +25,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size(ScreenUtil.screenWidth, ScreenUtil.statusBarHeight);
+  Size get preferredSize => Size(ScreenUtil.screenWidth,
+      (ScreenUtil.statusBarHeight + ThemeSizes.dimen_14.h));
 }

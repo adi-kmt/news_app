@@ -22,13 +22,13 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
         child: GNav(
           selectedIndex: context.read<BottomNavBarCubit>().state,
           activeColor: ThemeColour.secondaryColour,
           onTabChange: (index) =>
               {context.read<BottomNavBarCubit>().update(index)},
-          gap: 8,
+          gap: 5,
           backgroundColor: ThemeColour.selectedColour,
           color: ThemeColour.primaryColour,
           tabs: const [

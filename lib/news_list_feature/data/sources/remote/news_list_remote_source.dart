@@ -25,7 +25,8 @@ class NewsListRemoteSource {
         final newsListResponse = ArticleResponse.fromJson(response.data);
         return Success(
             data: newsListResponse.articles
-                ?.map((article) => article.getArticleEntity));
+                ?.map((article) => article.getArticleEntity)
+                .toList());
       } else {
         return Failure(
             error: APIException(

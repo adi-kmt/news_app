@@ -14,7 +14,5 @@ class NewsSourceEntity {
 
 extension NewsSourceResponseExtension on SourcesResponseSources {
   NewsSourceEntity get getNewsSourceEntity => NewsSourceEntity(
-      name: this.name ?? "",
-      language: this.language ?? "",
-      country: this.country ?? "");
+      name: name ?? "", language: language ?? "", country: country ?? "");
 }

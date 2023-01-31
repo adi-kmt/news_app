@@ -19,9 +19,10 @@ class SourcesListRemoteSource {
           queryParameters: {ApiUtils.apiKeyParameterKey: ApiKey.apiKey});
       final sourcesList = SourcesResponse.fromJson(response.data);
       if (response.statusCode == 200) {
-        return Success(
-            data: sourcesList.sources
-                ?.map((source) => source.getNewsSourceEntity));
+        final list = sourcesList.sources
+            ?.map((source) => source.getNewsSourceEntity)
+            .toList();
+        return Success(data: list);
       } else {
         return Failure(
             error: APIException(

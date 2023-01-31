@@ -14,6 +14,8 @@ class NewsStackedImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       Container(
+        width: ScreenUtil.screenWidth,
+        height: ScreenUtil.screenHeight / 2,
         foregroundDecoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -28,6 +30,7 @@ class NewsStackedImageWidget extends StatelessWidget {
           imageUrl: newsArticleEntity.image,
           width: ScreenUtil.screenWidth,
           height: ScreenUtil.screenHeight / 2,
+          fit: BoxFit.fill,
           placeholder: (context, _) => SizedBox(
               width: ScreenUtil.screenWidth,
               height: ScreenUtil.screenHeight / 2,

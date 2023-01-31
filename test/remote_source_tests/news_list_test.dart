@@ -78,22 +78,4 @@ void main() {
     final isInstanceOf = responseValue is Failure;
     expect(isInstanceOf, true);
   });
-
-  // test("Mocking Try catch behaviour behaviour", () async {
-  //   when(() async {
-  //     apiClientStub.get(ApiUtils.topHeadlinesEndpoint, queryParameters: {
-  //       ApiUtils.topHeadlineRequiredCountryParameterKey:
-  //           ApiUtils.topHeadlineRequiredCountryParameterValue,
-  //       ApiUtils.apiKeyParameterKey: ApiKey.apiKey,
-  //       ApiUtils.pageSizeParameterKey: ApiUtils.maxNoArticlesParameterValue
-  //     });
-  //   }).thenReturn(() async => Future(() => Exception("Sample APi error")));
-  //   final responseValue = await newsListRemoteSource.getNewsList();
-  //   if (responseValue != null) {
-  //     final isInstanceOf = responseValue is Failure;
-  //     expect(isInstanceOf, true);
-  //   } else {
-  //     printOnFailure("Test failed");
-  //   }
-  // });
 }

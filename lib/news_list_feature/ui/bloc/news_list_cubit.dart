@@ -22,7 +22,9 @@ class NewsListCubit extends Cubit<NewsListState> {
       required this.removeFavouriteNewsItemUseCase,
       required this.addFavouriteNewsItemUseCase,
       required this.getFavouriteNewsListUseCase})
-      : super(NewsListInitial());
+      : super(NewsListInitial()) {
+    getNewsList();
+  }
 
   void getNewsList() async {
     emit(NewsListLoading());

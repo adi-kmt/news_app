@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
-import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_list_feature/data/repository/news_list_repository_impl.dart';
 import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 import 'package:news_app/news_list_feature/domain/repository/news_list_repo.dart';
@@ -12,7 +11,6 @@ class NewsRepoMock extends Mock implements NewsListRepositoryImpl {}
 void main() {
   late final NewsListRepository newsListRepository;
   late final NewsListUseCase newsListUseCase;
-  final NoParams noParams = NoParams();
 
   setUpAll(() {
     newsListRepository = NewsRepoMock();
@@ -25,7 +23,7 @@ void main() {
     when(() => newsListRepository.getNewsList())
         .thenAnswer((_) async => response);
 
-    final result = await newsListUseCase.call(noParams);
+    final result = await newsListUseCase.call();
     if (result != null) {
       final isInstanceOf = result is Success;
       expect(isInstanceOf, true);
@@ -62,7 +60,7 @@ void main() {
     when(() => newsListRepository.getNewsList())
         .thenAnswer((_) async => response);
 
-    final result = await newsListUseCase.call(noParams);
+    final result = await newsListUseCase.call();
     if (result != null) {
       if (result is Success) {
         final data = result.data as List<NewsArticleEntity>;
@@ -89,7 +87,7 @@ void main() {
     when(() => newsListRepository.getNewsList())
         .thenAnswer((_) async => response);
 
-    final result = await newsListUseCase.call(noParams);
+    final result = await newsListUseCase.call();
     if (result != null) {
       if (result is Success) {
         final data = result.data as List<NewsArticleEntity>;
@@ -114,7 +112,7 @@ void main() {
     when(() => newsListRepository.getNewsList())
         .thenAnswer((_) async => response);
 
-    final result = await newsListUseCase.call(noParams);
+    final result = await newsListUseCase.call();
     if (result != null) {
       final isInstanceOf = result is Failure;
       expect(isInstanceOf, true);

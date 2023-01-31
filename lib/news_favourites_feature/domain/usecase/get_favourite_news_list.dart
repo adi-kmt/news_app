@@ -1,4 +1,3 @@
-import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 
 import '../repository/news_favourite_repository.dart';
@@ -8,7 +7,7 @@ class GetFavouriteNewsListUseCase {
 
   GetFavouriteNewsListUseCase({required this.newsFavouriteRepository});
 
-  Future<List<NewsArticleEntity>> call(NoParams param) async {
+  Future<List<NewsArticleEntity>> call() async {
     return await newsFavouriteRepository.getFavouriteList();
   }
 }

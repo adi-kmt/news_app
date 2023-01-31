@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/add_favourite_news_item.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/get_favourite_news_list.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/remove_favourite_news_item.dart';
@@ -47,7 +46,7 @@ void main() {
   blocTest("testing get favourite items success",
       build: () => newsFavouriteCubit,
       setUp: () async {
-        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+        when(() => getFavouriteNewsListUseCase.call())
             .thenAnswer((invocation) async => newsList);
       },
       act: (cubit) => cubit.getFavouriteNewsItem(),
@@ -59,7 +58,7 @@ void main() {
   blocTest("testing get favourite items failed",
       build: () => newsFavouriteCubit,
       setUp: () async {
-        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+        when(() => getFavouriteNewsListUseCase.call())
             .thenAnswer((invocation) async => []);
       },
       act: (cubit) => cubit.getFavouriteNewsItem(),

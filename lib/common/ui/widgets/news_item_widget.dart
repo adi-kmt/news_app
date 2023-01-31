@@ -7,6 +7,7 @@ import 'package:news_app/news_item_detail_feature/ui/screen/news_item_detail.dar
 import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 import 'package:news_app/news_list_feature/ui/bloc/news_list_cubit.dart';
 import 'package:news_app/utils/size_utils.dart';
+import 'package:news_app/utils/string_utils.dart';
 
 class NewsItemWidget extends StatelessWidget {
   final NewsArticleEntity newsArticleEntity;
@@ -46,11 +47,11 @@ class NewsItemWidget extends StatelessWidget {
                   placeholder: (context, _) => SizedBox(
                       width: ThemeSizes.dimen_20.w,
                       height: ThemeSizes.dimen_20.h,
-                      child: Image.asset('assets/images/default-image.jpg')),
+                      child: Image.asset(StringUtils.defaultImageLocation)),
                   errorWidget: (context, _, dynamic item) => SizedBox(
                       width: ThemeSizes.dimen_20.w,
                       height: ThemeSizes.dimen_20.h,
-                      child: Image.asset('assets/images/default-image.jpg')),
+                      child: Image.asset(StringUtils.defaultImageLocation)),
                 ),
               ),
               Expanded(

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../common/domain/no_param.dart';
 import '../../../news_list_feature/domain/model/news_entity.dart';
 import '../../domain/usecase/add_favourite_news_item.dart';
 import '../../domain/usecase/get_favourite_news_list.dart';
@@ -25,7 +24,7 @@ class NewsFavouriteCubit extends Cubit<NewsFavouriteState> {
   void getFavouriteNewsItem() async {
     emit(NewsFavouriteLoading());
     try {
-      final result = await getFavouriteNewsListUseCase.call(NoParams());
+      final result = await getFavouriteNewsListUseCase.call();
       if (result != null && result.isNotEmpty) {
         final newsList = result;
         emit(NewsFavouriteReady(newsArticleEntityList: newsList));

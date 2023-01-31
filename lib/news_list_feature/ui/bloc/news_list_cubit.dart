@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
-import 'package:news_app/common/domain/no_param.dart';
 
 import '../../../news_favourites_feature/domain/usecase/add_favourite_news_item.dart';
 import '../../../news_favourites_feature/domain/usecase/get_favourite_news_list.dart';
@@ -28,7 +27,7 @@ class NewsListCubit extends Cubit<NewsListState> {
 
   void getNewsList() async {
     emit(NewsListLoading());
-    final result = await newsListUseCase.call(NoParams());
+    final result = await newsListUseCase.call();
     if (result is Success) {
       final newsList = result.data as List<NewsArticleEntity>;
       emit(NewsListReady(newsArticleEntityList: newsList));
@@ -68,10 +67,9 @@ class NewsListCubit extends Cubit<NewsListState> {
   void appendFavouriteItems() async {
     List<NewsArticleEntity> newsList = [];
     emit(NewsListLoading());
-    final favNewsItems =
-        await getFavouriteNewsListUseCase.call(NoParams()) ?? [];
+    final favNewsItems = await getFavouriteNewsListUseCase.call() ?? [];
     final favNewsTitles = favNewsItems.map((e) => e.title).toList();
-    final result = await newsListUseCase.call(NoParams());
+    final result = await newsListUseCase.call();
     if (result is Success) {
       newsList = result.data as List<NewsArticleEntity>;
       newsList.removeWhere((element) => favNewsTitles.contains(element.title));

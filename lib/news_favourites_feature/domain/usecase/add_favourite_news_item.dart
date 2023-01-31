@@ -6,6 +6,7 @@ class AddFavouriteNewsItemUseCase {
 
   AddFavouriteNewsItemUseCase({required this.newsFavouriteRepository});
 
+  //TODO Why Mock failing without nullable return
   Future<void>? call(NewsArticleEntity newsArticleEntity) async {
     return await newsFavouriteRepository.addFavouriteItem(newsArticleEntity);
   }

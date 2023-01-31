@@ -3,7 +3,6 @@ import 'package:news_app/common/theme/theme_colour.dart';
 import 'package:news_app/common/theme/theme_text.dart';
 
 ThemeData returnTheme() => ThemeData(
-      // unselectedWidgetColor: AppColor.royalBlue,
       primaryColor: ThemeColour.selectedColour,
       scaffoldBackgroundColor: ThemeColour.primaryColour,
       brightness: Brightness.light,

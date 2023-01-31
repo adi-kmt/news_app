@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_favourites_feature/data/repository/news_favourite_repo_impl.dart';
 import 'package:news_app/news_favourites_feature/domain/repository/news_favourite_repository.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/check_if_favourite_news_item.dart';
@@ -42,7 +41,7 @@ void main() {
   test("Check get favourite list usecase", () async {
     when(() => newsFavouriteRepositoryMock.getFavouriteList())
         .thenAnswer((invocation) async => newsList);
-    final result = await getFavouriteNewsListUseCase.call(NoParams());
+    final result = await getFavouriteNewsListUseCase.call();
     expect(result, newsList);
   });
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/common/theme/theme_sizes.dart';
 import 'package:news_app/news_list_feature/domain/model/news_entity.dart';
 import 'package:news_app/utils/size_utils.dart';
+import 'package:news_app/utils/string_utils.dart';
 
 import '../../../news_item_detail_feature/ui/screen/news_item_detail.dart';
 
@@ -44,11 +45,11 @@ class NewsFavouriteItemWidget extends StatelessWidget {
                   placeholder: (context, _) => SizedBox(
                       width: ThemeSizes.dimen_20.w,
                       height: ThemeSizes.dimen_20.h,
-                      child: Image.asset('assets/images/default-image.jpg')),
+                      child: Image.asset(StringUtils.defaultImageLocation)),
                   errorWidget: (context, _, dynamic item) => SizedBox(
                       width: ThemeSizes.dimen_20.w,
                       height: ThemeSizes.dimen_20.h,
-                      child: Image.asset('assets/images/default-image.jpg')),
+                      child: Image.asset(StringUtils.defaultImageLocation)),
                 ),
               ),
               Expanded(

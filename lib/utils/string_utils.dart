@@ -7,5 +7,7 @@ class StringUtils {
   static const String favourite = "Favourite";
   static const String noItemsFound = "No Items found";
 
-  static const newsBox = 'newsBox';
+  static const String newsBox = 'newsBox';
+
+  static const String defaultImageLocation = 'assets/images/default-image.jpg';
 }

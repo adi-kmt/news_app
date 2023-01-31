@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
-import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_source_feature/domain/model/news_source_entity.dart';
 
 import '../../domain/usecase/sources_list_usecase.dart';
@@ -18,7 +17,7 @@ class NewsSourceListCubit extends Cubit<NewsSourceListState> {
 
   void getSources() async {
     emit(NewsSourcesListLoading());
-    final sourcesResult = await sourcesListUsecase.call(NoParams());
+    final sourcesResult = await sourcesListUsecase.call();
     if (sourcesResult is Success) {
       final data = sourcesResult.data as List<NewsSourceEntity>;
       emit(NewsSourcesListReady(sourceList: data));

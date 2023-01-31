@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
-import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/add_favourite_news_item.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/get_favourite_news_list.dart';
 import 'package:news_app/news_favourites_feature/domain/usecase/remove_favourite_news_item.dart';
@@ -85,7 +84,7 @@ void main() {
   blocTest("Check get List success",
       build: () => newsListCubit,
       setUp: () async {
-        when(() => newsListUseCase.call(NoParams()))
+        when(() => newsListUseCase.call())
             .thenAnswer((invocation) async => Success(data: newsList));
       },
       act: (cubit) => cubit.getNewsList(),
@@ -97,7 +96,7 @@ void main() {
   blocTest("Check get List failure",
       build: () => newsListCubit,
       setUp: () async {
-        when(() => newsListUseCase.call(NoParams())).thenAnswer(
+        when(() => newsListUseCase.call()).thenAnswer(
             (invocation) async => Failure(error: Exception("Api error")));
       },
       act: (cubit) => cubit.getNewsList(),
@@ -111,9 +110,9 @@ void main() {
       setUp: () async {
         when(() => addFavouriteNewsItemUseCase.call(truthy))
             .thenAnswer((_) async => returnVoid());
-        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+        when(() => getFavouriteNewsListUseCase.call())
             .thenAnswer((_) async => [truthy]);
-        when(() => newsListUseCase.call(NoParams()))
+        when(() => newsListUseCase.call())
             .thenAnswer((_) async => Success(data: [newsAdded[2]]));
       },
       act: (cubit) async => cubit.addNewsToFavourite(newsAdded[0]),
@@ -124,15 +123,14 @@ void main() {
             NewsListReady(newsArticleEntityList: [truthy, newsAdded[2]])
           ]);
 
-  //TODO test case not working
   blocTest("Add favourite, failure from get list",
       build: () => newsListCubit,
       setUp: () {
-        when(() => newsListUseCase.call(NoParams()))
+        when(() => newsListUseCase.call())
             .thenAnswer((_) async => Failure(error: Exception("Failed API")));
         when(() => addFavouriteNewsItemUseCase.call(newsAdded[0]))
             .thenAnswer((_) async => returnVoid());
-        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+        when(() => getFavouriteNewsListUseCase.call())
             .thenAnswer((_) async => [newsAdded[0]]);
       },
       act: (cubit) => cubit.addNewsToFavourite(newsAdded[0]),
@@ -146,11 +144,11 @@ void main() {
   blocTest("Remove favourite, Success list from get list",
       build: () => newsListCubit,
       setUp: () async {
-        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+        when(() => getFavouriteNewsListUseCase.call())
             .thenAnswer((_) async => [newsAdded[2]]);
         when(() => removeFavouriteNewsItemUseCase.call(newsAdded[1].title))
             .thenAnswer((_) async => returnVoid());
-        when(() => newsListUseCase.call(NoParams()))
+        when(() => newsListUseCase.call())
             .thenAnswer((_) async => Success(data: [newsAdded[2]]));
       },
       act: (cubit) async => cubit.removeNewsFromFavourite(newsAdded[1]),
@@ -165,11 +163,11 @@ void main() {
   blocTest("Remove favourite, failure from get list",
       build: () => newsListCubit,
       setUp: () async {
-        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+        when(() => getFavouriteNewsListUseCase.call())
             .thenAnswer((_) async => [newsAdded[2]]);
         when(() => removeFavouriteNewsItemUseCase.call(newsAdded[1].title))
             .thenAnswer((_) async => returnVoid());
-        when(() => newsListUseCase.call(NoParams())).thenAnswer(
+        when(() => newsListUseCase.call()).thenAnswer(
             (_) async => Failure(error: Exception("Random exception")));
       },
       act: (cubit) async => cubit.removeNewsFromFavourite(newsAdded[1]),

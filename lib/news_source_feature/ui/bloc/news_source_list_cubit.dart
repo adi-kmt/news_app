@@ -12,7 +12,9 @@ class NewsSourceListCubit extends Cubit<NewsSourceListState> {
   late final SourcesListUsecase sourcesListUsecase;
 
   NewsSourceListCubit({required this.sourcesListUsecase})
-      : super(NewsSourceListInitial());
+      : super(NewsSourceListInitial()) {
+    getSources();
+  }
 
   void getSources() async {
     emit(NewsSourcesListLoading());

@@ -5,6 +5,7 @@ class StringUtils {
   static const String mainHeadlines = "Main Headlines";
   static const String sources = "Sources";
   static const String favourite = "Favourite";
+  static const String noItemsFound = "No Items found";
 
   static const newsBox = 'newsBox';
 }

@@ -60,7 +60,7 @@ void main() {
       build: () => newsFavouriteCubit,
       setUp: () async {
         when(() => getFavouriteNewsListUseCase.call(NoParams()))
-            .thenAnswer((invocation) async => null);
+            .thenAnswer((invocation) async => []);
       },
       act: (cubit) => cubit.getFavouriteNewsItem(),
       expect: () => <NewsFavouriteState>[

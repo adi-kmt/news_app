@@ -23,7 +23,7 @@ class NewsListCubit extends Cubit<NewsListState> {
       required this.addFavouriteNewsItemUseCase,
       required this.getFavouriteNewsListUseCase})
       : super(NewsListInitial()) {
-    appendFavouriteItems();
+    // appendFavouriteItems();
   }
 
   void getNewsList() async {

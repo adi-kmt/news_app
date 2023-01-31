@@ -20,12 +20,12 @@ class NewsFavouriteRepositoryImpl implements NewsFavouriteRepository {
   }
 
   @override
-  Future<List<NewsArticleEntity>?> getFavouriteList() async {
+  Future<List<NewsArticleEntity>> getFavouriteList() async {
     final newsArticleList =
         await newsFavouriteLocalSource.getAllNewsFavourite();
     return newsArticleList
         .map((newsItem) => NewsArticleEntity.fromNewsArticleEntitiy(newsItem))
-        ?.toList();
+        .toList();
   }
 
   @override

@@ -37,15 +37,23 @@ final newsAdded = [
       title: "abcd",
       source: "abcd",
       image: "aaaa",
-      isFavourite: false),
+      isFavourite: true),
   NewsArticleEntity(
       content: 'aab',
       description: "ac",
       title: "abd",
       source: "bcd",
       image: "aaa",
-      isFavourite: true),
+      isFavourite: false),
 ];
+
+final truthy = newsAdded[0].deepCopy(
+    content: newsAdded[0].content,
+    description: newsAdded[0].description,
+    title: newsAdded[0].title,
+    source: newsAdded[0].source,
+    image: newsAdded[0].image,
+    isFavourite: !newsAdded[0].isFavourite);
 
 void main() {
   late final NewsListUseCase newsListUseCase;
@@ -74,7 +82,7 @@ void main() {
     expect(newsListCubit.state, NewsListInitial());
   });
 
-  blocTest("Check get List",
+  blocTest("Check get List success",
       build: () => newsListCubit,
       setUp: () async {
         when(() => newsListUseCase.call(NoParams()))
@@ -100,38 +108,77 @@ void main() {
 
   blocTest("Add favourite, Success list from get list",
       build: () => newsListCubit,
-      setUp: () {
-        when(() => newsListUseCase.call(NoParams())).thenAnswer(
-            (_) async => Success(data: [newsAdded[0], newsAdded[1]]));
-        when(() => addFavouriteNewsItemUseCase.call(newsAdded[2]))
+      setUp: () async {
+        when(() => addFavouriteNewsItemUseCase.call(truthy))
             .thenAnswer((_) async => returnVoid());
+        when(() => newsListUseCase.call(NoParams()))
+            .thenAnswer((_) async => Success(data: [newsAdded[2]]));
         when(() => getFavouriteNewsListUseCase.call(NoParams()))
-            .thenAnswer((_) async => [newsAdded[2]]);
+            .thenAnswer((_) async => [truthy, newsAdded[2]]);
       },
-      act: (cubit) => cubit.addNewsToFavourite(newsAdded[2]),
+      act: (cubit) async => cubit.addNewsToFavourite(newsAdded[0]),
       expect: () => <NewsListState>[
             NewsListLoading(),
-            NewsListFavouriteAdded(newsArticleEntity: newsAdded[2]),
+            NewsListFavouriteAdded(newsArticleEntity: truthy),
             NewsListLoading(),
-            NewsListReady(newsArticleEntityList: newsAdded)
+            NewsListReady(newsArticleEntityList: [truthy, newsAdded[2]])
           ]);
 
+  //TODO test case not working
   blocTest("Add favourite, failure from get list",
       build: () => newsListCubit,
       setUp: () {
         when(() => newsListUseCase.call(NoParams()))
             .thenAnswer((_) async => Failure(error: Exception("Failed API")));
-        when(() => addFavouriteNewsItemUseCase.call(newsAdded[2]))
+        when(() => addFavouriteNewsItemUseCase.call(newsAdded[0]))
             .thenAnswer((_) async => returnVoid());
         when(() => getFavouriteNewsListUseCase.call(NoParams()))
-            .thenAnswer((_) async => [newsAdded[2]]);
+            .thenAnswer((_) async => [newsAdded[0]]);
       },
-      act: (cubit) => cubit.addNewsToFavourite(newsAdded[2]),
+      act: (cubit) => cubit.addNewsToFavourite(newsAdded[0]),
       expect: () => <NewsListState>[
             NewsListLoading(),
-            NewsListFavouriteAdded(newsArticleEntity: newsAdded[2]),
+            NewsListFavouriteAdded(newsArticleEntity: newsAdded[0]),
+            NewsListLoading(),
+            NewsListReady(newsArticleEntityList: [newsAdded[0]])
+          ]);
+
+  //TODO test case not working
+  blocTest("Remove favourite, Success list from get list",
+      build: () => newsListCubit,
+      setUp: () async {
+        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+            .thenAnswer((_) async => [newsAdded[2]]);
+        when(() => removeFavouriteNewsItemUseCase.call(newsAdded[1].title))
+            .thenAnswer((_) async => returnVoid());
+        when(() => newsListUseCase.call(NoParams()))
+            .thenAnswer((_) async => Success(data: [newsAdded[2]]));
+      },
+      act: (cubit) async => cubit.removeNewsFromFavourite(newsAdded[1]),
+      expect: () => <NewsListState>[
+            NewsListLoading(),
+            NewsListFavouriteRemoved(
+                newsArticleEntityTitle: newsAdded[1].title),
+            NewsListLoading(),
+            NewsListReady(newsArticleEntityList: [newsAdded[2]])
+          ]);
+
+  blocTest("Remove favourite, failure from get list",
+      build: () => newsListCubit,
+      setUp: () async {
+        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+            .thenAnswer((_) async => [newsAdded[2]]);
+        when(() => removeFavouriteNewsItemUseCase.call(newsAdded[1].title))
+            .thenAnswer((_) async => returnVoid());
+        when(() => newsListUseCase.call(NoParams())).thenAnswer(
+            (_) async => Failure(error: Exception("Random exception")));
+      },
+      act: (cubit) async => cubit.removeNewsFromFavourite(newsAdded[1]),
+      expect: () => <NewsListState>[
+            NewsListLoading(),
+            NewsListFavouriteRemoved(
+                newsArticleEntityTitle: newsAdded[1].title),
             NewsListLoading(),
             NewsListReady(newsArticleEntityList: [newsAdded[2]])
           ]);
 }
-//TODO write remove favourite for failure and success get List

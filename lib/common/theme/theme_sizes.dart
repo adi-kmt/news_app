@@ -6,4 +6,6 @@ class ThemeSizes {
   static const double dimen_16 = 16;
   static const double dimen_20 = 20;
   static const double dimen_24 = 24;
+  static const double dimen_90 = 90;
+  static const double dimen_70 = 70;
 }

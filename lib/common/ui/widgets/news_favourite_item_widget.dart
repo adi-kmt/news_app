@@ -40,15 +40,15 @@ class NewsFavouriteItemWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 10),
                 child: CachedNetworkImage(
                   imageUrl: newsArticleEntity.image,
-                  width: ThemeSizes.dimen_20.w,
-                  height: ThemeSizes.dimen_20.h,
+                  width: ThemeSizes.dimen_90.w,
+                  height: ThemeSizes.dimen_70.w,
                   placeholder: (context, _) => SizedBox(
-                      width: ThemeSizes.dimen_20.w,
-                      height: ThemeSizes.dimen_20.h,
+                      width: ThemeSizes.dimen_90.w,
+                      height: ThemeSizes.dimen_70.w,
                       child: Image.asset(StringUtils.defaultImageLocation)),
                   errorWidget: (context, _, dynamic item) => SizedBox(
-                      width: ThemeSizes.dimen_20.w,
-                      height: ThemeSizes.dimen_20.h,
+                      width: ThemeSizes.dimen_90.w,
+                      height: ThemeSizes.dimen_70.w,
                       child: Image.asset(StringUtils.defaultImageLocation)),
                 ),
               ),

@@ -23,7 +23,7 @@ class NewsListCubit extends Cubit<NewsListState> {
       required this.addFavouriteNewsItemUseCase,
       required this.getFavouriteNewsListUseCase})
       : super(NewsListInitial()) {
-    getNewsList();
+    appendFavouriteItems();
   }
 
   void getNewsList() async {
@@ -39,15 +39,29 @@ class NewsListCubit extends Cubit<NewsListState> {
 
   void addNewsToFavourite(NewsArticleEntity newsArticleEntity) async {
     emit(NewsListLoading());
-    await addFavouriteNewsItemUseCase.call(newsArticleEntity);
-    emit(NewsListFavouriteAdded(newsArticleEntity: newsArticleEntity));
+    final articleEntity = newsArticleEntity.deepCopy(
+        content: newsArticleEntity.content,
+        description: newsArticleEntity.description,
+        title: newsArticleEntity.title,
+        source: newsArticleEntity.source,
+        image: newsArticleEntity.image,
+        isFavourite: !newsArticleEntity.isFavourite);
+    await addFavouriteNewsItemUseCase.call(articleEntity);
+    emit(NewsListFavouriteAdded(newsArticleEntity: articleEntity));
     appendFavouriteItems();
   }
 
-  void removeNewsFromFavourite(String newsTitle) async {
+  void removeNewsFromFavourite(NewsArticleEntity newsArticleEntity) async {
     emit(NewsListLoading());
-    await removeFavouriteNewsItemUseCase.call(newsTitle);
-    emit(NewsListFavouriteRemoved(newsArticleEntityTitle: newsTitle));
+    final articleEntity = newsArticleEntity.deepCopy(
+        content: newsArticleEntity.content,
+        description: newsArticleEntity.description,
+        title: newsArticleEntity.title,
+        source: newsArticleEntity.source,
+        image: newsArticleEntity.image,
+        isFavourite: !newsArticleEntity.isFavourite);
+    await removeFavouriteNewsItemUseCase.call(articleEntity.title);
+    emit(NewsListFavouriteRemoved(newsArticleEntityTitle: articleEntity.title));
     appendFavouriteItems();
   }
 
@@ -56,14 +70,15 @@ class NewsListCubit extends Cubit<NewsListState> {
     emit(NewsListLoading());
     final favNewsItems =
         await getFavouriteNewsListUseCase.call(NoParams()) ?? [];
+    final favNewsTitles = favNewsItems.map((e) => e.title).toList();
     final result = await newsListUseCase.call(NoParams());
     if (result is Success) {
       newsList = result.data as List<NewsArticleEntity>;
-      newsList.removeWhere((element) => favNewsItems.contains(element));
+      newsList.removeWhere((element) => favNewsTitles.contains(element.title));
     }
 
     favNewsItems.forEach((element) {
-      newsList.add(element);
+      newsList.insert(0, element);
     });
     emit(NewsListReady(newsArticleEntityList: newsList));
   }

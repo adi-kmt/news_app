@@ -134,3 +134,4 @@ void main() {
             NewsListReady(newsArticleEntityList: [newsAdded[2]])
           ]);
 }
+//TODO write remove favourite for failure and success get List

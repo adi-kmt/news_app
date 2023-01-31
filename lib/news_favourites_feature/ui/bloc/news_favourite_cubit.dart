@@ -18,16 +18,22 @@ class NewsFavouriteCubit extends Cubit<NewsFavouriteState> {
       {required this.getFavouriteNewsListUseCase,
       required this.removeFavouriteNewsItemUseCase,
       required this.addFavouriteNewsItemUseCase})
-      : super(NewsFavouriteInitial());
+      : super(NewsFavouriteInitial()) {
+    getFavouriteNewsItem();
+  }
 
   void getFavouriteNewsItem() async {
     emit(NewsFavouriteLoading());
-
-    final result = await getFavouriteNewsListUseCase.call(NoParams());
-    if (result != null) {
-      final newsList = result;
-      emit(NewsFavouriteReady(newsArticleEntityList: newsList));
-    } else {
+    try {
+      final result = await getFavouriteNewsListUseCase.call(NoParams());
+      if (result != null && result.isNotEmpty) {
+        final newsList = result;
+        emit(NewsFavouriteReady(newsArticleEntityList: newsList));
+      } else {
+        emit(NewsFavouriteFailed(
+            errorMessage: Exception("Failed to get favourite items")));
+      }
+    } catch (e) {
       emit(NewsFavouriteFailed(
           errorMessage: Exception("Failed to get favourite items")));
     }

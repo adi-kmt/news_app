@@ -6,7 +6,7 @@ class AddFavouriteNewsItemUseCase {
 
   AddFavouriteNewsItemUseCase({required this.newsFavouriteRepository});
 
-  Future<void> call(NewsArticleEntity newsArticleEntity) async {
+  Future<void>? call(NewsArticleEntity newsArticleEntity) async {
     return await newsFavouriteRepository.addFavouriteItem(newsArticleEntity);
   }
 }

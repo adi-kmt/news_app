@@ -111,10 +111,10 @@ void main() {
       setUp: () async {
         when(() => addFavouriteNewsItemUseCase.call(truthy))
             .thenAnswer((_) async => returnVoid());
+        when(() => getFavouriteNewsListUseCase.call(NoParams()))
+            .thenAnswer((_) async => [truthy]);
         when(() => newsListUseCase.call(NoParams()))
             .thenAnswer((_) async => Success(data: [newsAdded[2]]));
-        when(() => getFavouriteNewsListUseCase.call(NoParams()))
-            .thenAnswer((_) async => [truthy, newsAdded[2]]);
       },
       act: (cubit) async => cubit.addNewsToFavourite(newsAdded[0]),
       expect: () => <NewsListState>[
@@ -143,7 +143,6 @@ void main() {
             NewsListReady(newsArticleEntityList: [newsAdded[0]])
           ]);
 
-  //TODO test case not working
   blocTest("Remove favourite, Success list from get list",
       build: () => newsListCubit,
       setUp: () async {

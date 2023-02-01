@@ -19,7 +19,7 @@ class NewsItemDetailBodyWidget extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: Text(
             newsArticleEntity.description,
             softWrap: true,

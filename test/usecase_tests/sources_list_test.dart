@@ -1,8 +1,6 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:news_app/common/api/response_wrapper.dart';
-import 'package:news_app/common/domain/no_param.dart';
 import 'package:news_app/news_source_feature/data/repository/sources_list_repo_impl.dart';
-import 'package:news_app/news_source_feature/data/sources/remote/response/sources_response_entity.dart';
 import 'package:news_app/news_source_feature/domain/model/news_source_entity.dart';
 import 'package:news_app/news_source_feature/domain/repository/source_list_repo.dart';
 import 'package:news_app/news_source_feature/domain/usecase/sources_list_usecase.dart';
@@ -13,7 +11,6 @@ class SourcesRepoMock extends Mock implements SourcesListRepositoryImpl {}
 void main() {
   late final SourceListRepository sourceListRepository;
   late final SourcesListUsecase sourcesListUsecase;
-  final NoParams noParams = NoParams();
 
   setUpAll(() {
     sourceListRepository = SourcesRepoMock();
@@ -27,7 +24,7 @@ void main() {
     when(() => sourceListRepository.getSourcesList())
         .thenAnswer((_) async => response);
 
-    final result = await sourcesListUsecase.call(noParams);
+    final result = await sourcesListUsecase.call();
     if (result != null) {
       final isInstanceOf = result is Success;
       expect(isInstanceOf, true);
@@ -46,7 +43,7 @@ void main() {
     when(() => sourceListRepository.getSourcesList())
         .thenAnswer((_) async => response);
 
-    final result = await sourcesListUsecase.call(noParams);
+    final result = await sourcesListUsecase.call();
     if (result != null) {
       if (result is Success) {
         final data = result.data as List<NewsSourceEntity>;
@@ -68,7 +65,7 @@ void main() {
     when(() => sourceListRepository.getSourcesList())
         .thenAnswer((_) async => response);
 
-    final result = await sourcesListUsecase.call(noParams);
+    final result = await sourcesListUsecase.call();
     if (result != null) {
       if (result is Success) {
         final data = result.data as List<NewsSourceEntity>;
@@ -91,7 +88,7 @@ void main() {
     when(() => sourceListRepository.getSourcesList())
         .thenAnswer((_) async => response);
 
-    final result = await sourcesListUsecase.call(noParams);
+    final result = await sourcesListUsecase.call();
     if (result != null) {
       if (result is Success) {
         final data = result.data as List<NewsSourceEntity>;
@@ -113,7 +110,7 @@ void main() {
     when(() => sourceListRepository.getSourcesList())
         .thenAnswer((_) async => response);
 
-    final result = await sourcesListUsecase.call(noParams);
+    final result = await sourcesListUsecase.call();
     if (result != null) {
       final isInstanceOf = result is Failure;
       expect(isInstanceOf, true);

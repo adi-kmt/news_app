@@ -1,11 +1,28 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:news_app/news_app.dart';
 import 'package:news_app/common/di/get_it_module.dart' as get_it;
+import 'package:news_app/news_app.dart';
+import 'package:news_app/news_favourites_feature/data/local/hivie_init.dart';
 
 void main() async {
-  //TODO to check better init of getIt
+  WidgetsFlutterBinding.ensureInitialized();
   unawaited(get_it.init());
+  await get_it.getItInstance<HiveInit>().init();
   runApp(const NewsApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Placeholder(),
+    );
+  }
 }

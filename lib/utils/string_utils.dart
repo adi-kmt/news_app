@@ -1,0 +1,13 @@
+class StringUtils {
+  StringUtils._();
+
+  static const String appTitle = "News App";
+  static const String mainHeadlines = "Main Headlines";
+  static const String sources = "Sources";
+  static const String favourite = "Favourite";
+  static const String noItemsFound = "No Items found";
+
+  static const String newsBox = 'newsBox';
+
+  static const String defaultImageLocation = 'assets/images/default-image.jpg';
+}
